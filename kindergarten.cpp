@@ -6,6 +6,273 @@
 #include "C:\Users\admin\Documents\team assignment\User.h"
 using namespace std;
 
+void manageteacher1( giaovien t[], int n){
+    int choice;
+
+    while (choice!=9) {
+        cout << "\n                      CHUONG TRINH QUAN LY GIAO VIEN.\t" << endl << endl;
+        cout << "\n                                     MENU                                        ";
+        cout << "\n---------------------------------------------------------------------------------";     	
+        cout << "\n                      1.Nhap thong tin giao vien                                 ";
+        cout << "\n                      2.Xuat danh sach giao vien                                 ";
+        cout << "\n                      3.Tim kiem giao vien theo ma giao vien                     ";
+        cout << "\n                      4.Tim kiem giao vien theo cccd                             ";
+        cout << "\n                      5.Sap xep luong giao vien tang dan                         ";
+        cout << "\n                      6.Tinh tong luong cac giao vien                            ";
+        cout << "\n                      7.Tim kiem giao vien thu nhap cao nhat                     ";
+        cout << "\n                      8.Tim kiem giao vien co phu cap>100.000                    "; 
+        cout << "\n                      9.Thoat khoi chuong trinh nay.                             ";
+        cout << "\n                                                                                 ";  
+        cout << "\n---------------------------------------------------------------------------------";
+        cout << "\n                      Nhap lua chon cua ban:";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                giaovien k;
+                k.nhap();
+                giaovien *b = new giaovien[n + 1];
+                for (int i = 0; i < n; ++i) {
+                    b[i] = t[i];
+                }
+                b[n] = k;
+                n += 1;
+                delete[] t;
+                t = b;
+                break;
+                cout << endl;
+                system("pause");
+                break;
+            }
+            case 2:
+            xuatds(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 3:
+                timkiemmagv(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 4:
+                timkiemcccd(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 5:
+                sapxep(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 6:
+                tinhtongluong(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 7:
+                thuclinhmax(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 8:
+                timphucap(t, n);
+                cout << endl;
+                system("pause");
+                break;
+            case 9:
+                cout << "Thoat.\n";
+                delete[] t;
+                break;
+            default:
+                cout << "Lua chon khong hop le. Vui long chon lai.\n";
+                break;
+        }
+    }
+}
+void managestudent( Student s[], int n){
+    int choice;
+
+    while (choice!=5) {
+        cout << "\n                                         MENU" << endl;
+
+        cout << "\n1.Nhap thong tin hoc sinh moi.           " << "2.Hien thi danh sach hoc sinh";     	
+        cout << "\n3.Sua doi thong tin hoc sinh.            " << "4.Tim kiem thong tin hoc sinh.";
+        cout << "\n5.Thoat va ket thuc chuong trinh.        " << endl;
+
+        cout << "\nNhap lua chon cua ban:";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                Student k;
+                k.enter();
+                Student *b = new Student[n + 1];
+                for (int i = 0; i < n; ++i) {
+                    b[i] = s[i];
+                }
+                b[n] = k;
+                n += 1;
+                delete[] s;
+                s = b;
+                cout << endl;
+                break;
+            }
+            case 2:
+                displayAll(s, n);
+                cout << endl;
+                //system("pause");
+                break;
+            case 3:
+                change(s, n);
+                cout << endl;
+                //system("pause");
+                break;
+            case 4:
+                search(s, n);
+                cout << endl;
+                //system("pause");
+                break;
+            case 5:
+                cout << "Thoat.\n";
+                delete[] s;
+                break;
+            default:
+                cout << "Lua chon khong hop le. Vui long chon lai.\n";
+                break;
+        }
+        system("pause");
+    }
+}
+void managetuition(Tuition T[], int d){
+    int k ;
+    while (k != 4) {
+        cout << "\n                                              MENU " << endl;
+        cout << "------------------------------------------------------------------------------------------------" << endl;
+        cout << "1. Hien thi thong tin hoc phi toan bo.\n2. Hien thi nhung hoc sinh chua dong xong hoc phi." << endl;
+        cout << "3. Thay doi trang thai hoc phi cua hoc sinh.\n4. Thoat." << endl;
+        cout << "\nNhap lua chon: ";
+        cin >> k;
+        switch (k) {
+            case 1:
+                displayAll(T, d);
+                break;
+            case 2:
+                unpaid(T, d);
+                break;
+            case 3: {
+                int id;
+                bool check = false;
+                cout << "\nNhap ma hoc sinh: ";
+                cin >> id;
+                for (int i = 0; i < d; i++) {
+                    if (id == T[i].getid()) {
+                        T[i].changestatus();
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check) {
+                    cout << "\nMa hoc sinh khong ton tai. Vui long nhap lai." << endl;
+                }
+                break;
+            }
+            case 4:
+                cout << "\nThoat." << endl;
+                break;
+            default:
+                cout << "\nLua chon khong hop le. Vui long nhap lai." << endl;
+                break;
+        }
+        system("pause");
+    }
+
+}
+void manageparent ( Parent parents[], int e){
+    int choice ;
+
+    while (choice != 5) {
+        cout << "\n                                         MENU" << endl;
+        cout << "\n1. Nhap thong tin phu huynh moi.             " << "2. Hien thi danh sach phu huynh." << endl;
+        cout << "\n3. Sua doi thong tin phu huynh.                " << "4. Tim kiem thong tin phu huynh." << endl;
+        cout << "\n5. Thoat va ket thuc chuong trinh." << endl;
+
+        cout << "\nNhap lua chon cua ban: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: {
+                Parent newParent;
+                newParent.enter();
+                Parent* temp = new Parent[e + 1];
+                for (int i = 0; i < e; ++i) {
+                    temp[i] = parents[i];
+                }
+                temp[e] = newParent;
+                delete[] parents;
+                parents = temp;
+                e += 1;
+                cout << endl;
+                system("pause");
+                break;
+            }
+            case 2:
+                displayAll(parents, e);
+                cout << endl;
+                system("pause");
+                break;
+            case 3:
+                changeParent(parents, e);
+                cout << endl;
+                system("pause");
+                break;
+            case 4:
+                searchParent(parents, e);
+                cout << endl;
+                system("pause");
+                break;
+            case 5:
+                cout << "Thoat.\n";
+                delete[] parents;
+                system("pause");
+                break;
+            default:
+                cout << "Lua chon khong hop le. Vui long chon lai.\n";
+                break;
+        }
+    }
+}
+void manageteacher2( giaovien t[], int n, int user){
+    int choice;
+    while(choice!=2){
+        cout << "\n                       MENU                         ";
+        cout << "\n----------------------------------------------------";  
+        cout << "\n        1.Hien thi thong tin ca nhan                ";
+        cout << "\n        2.Thoat chuong trinh nay                    ";
+        cout << "\n                                                    ";  
+        cout << "\n----------------------------------------------------";
+        cout << "\n\tNhap lua chon cua ban:";
+
+        cin >> choice;
+
+        switch(choice){
+
+            case 1:
+            for (int i=0; i<n; i++){
+                if(user == t[i].get_magv()){
+                    t[i].xuat();
+                }
+            }
+            system("pause");
+            break;
+            case 2:
+            cout << "\nThoat.";
+            system("pause");
+            break;
+            default:
+            cout << "\nLoi. Vui long nhap lai.";
+        }
+    }
+}
 
 int main(){
     int a=17;
@@ -67,20 +334,20 @@ int main(){
     T[11] = Tuition(2020012, 4000000, "Unpaid", 200000, "Unpaid", 800000, "Paid");
 
     int e = 12;
-    Parent* parents = new Parent[e];
+    Parent* p = new Parent[e];
     
-    parents[0] = Parent("Nguyen Van Linh", "Cha", 1, 1, 1970, "Ha Noi", "Bac si", "0901234567");
-    parents[1] = Parent("Tran Thi Mai", "Me", 2, 2, 1975, "Hai Phong", "Giao vien", "0902345678");
-    parents[2] = Parent("Le Van Hoa", "Cha", 3, 3, 1980, "Da Nang", "Ky su", "0903456789");
-    parents[3] = Parent("Pham Thi Lan", "Me", 4, 4, 1985, "Quang Ninh", "Ke toan", "0904567890");
-    parents[4] = Parent("Hoang Van Thanh", "Cha", 5, 5, 1990, "HCM", "Luat su", "0905678901");
-    parents[5] = Parent("Nguyen Thi Nga", "Me", 6, 6, 1978, "Ha Noi", "Kinh doanh", "0906789012");
-    parents[6] = Parent("Tran Van Binh", "Cha", 7, 7, 1982, "Hai Phong", "Ky thuat vien", "0907890123");
-    parents[7] = Parent("Le Thi Cuc", "Me", 8, 8, 1988, "Da Nang", "Nhan vien van phong", "0908901234");
-    parents[8] = Parent("Pham Van Long", "Cha", 9, 9, 1979, "Quang Ninh", "Giam doc", "0909012345");
-    parents[9] = Parent("Hoang Thi Anh", "Me", 10, 10, 1984, "HCM", "Bao chi", "0910123456");
-    parents[10] = Parent("Nguyen Van Hieu", "Cha", 11, 11, 1972, "Ha Noi", "Giao su", "0911234567");
-    parents[11] = Parent("Tran Thi Hong", "Me", 12, 12, 1986, "Hai Phong", "Tham dinh vien", "0912345678");
+    p[0] = Parent("Nguyen Van Linh", "Cha", 1, 1, 1970, "Ha Noi", "Bac si", "0901234567");
+    p[1] = Parent("Tran Thi Mai", "Me", 2, 2, 1975, "Hai Phong", "Giao vien", "0902345678");
+    p[2] = Parent("Le Van Hoa", "Cha", 3, 3, 1980, "Da Nang", "Ky su", "0903456789");
+    p[3] = Parent("Pham Thi Lan", "Me", 4, 4, 1985, "Quang Ninh", "Ke toan", "0904567890");
+    p[4] = Parent("Hoang Van Thanh", "Cha", 5, 5, 1990, "HCM", "Luat su", "0905678901");
+    p[5] = Parent("Nguyen Thi Nga", "Me", 6, 6, 1978, "Ha Noi", "Kinh doanh", "0906789012");
+    p[6] = Parent("Tran Van Binh", "Cha", 7, 7, 1982, "Hai Phong", "Ky thuat vien", "0907890123");
+    p[7] = Parent("Le Thi Cuc", "Me", 8, 8, 1988, "Da Nang", "Nhan vien van phong", "0908901234");
+    p[8] = Parent("Pham Van Long", "Cha", 9, 9, 1979, "Quang Ninh", "Giam doc", "0909012345");
+    p[9] = Parent("Hoang Thi Anh", "Me", 10, 10, 1984, "HCM", "Bao chi", "0910123456");
+    p[10] = Parent("Nguyen Van Hieu", "Cha", 11, 11, 1972, "Ha Noi", "Giao su", "0911234567");
+    p[11] = Parent("Tran Thi Hong", "Me", 12, 12, 1986, "Hai Phong", "Tham dinh vien", "0912345678");
 
 
     cout << "                   CHAO MUNG BAN DEN VOI HE THONG QUAN LI TRUONG MAM NON" << endl << endl;
@@ -103,493 +370,121 @@ int main(){
     }
     if (!check) {
         cout << "Tai khoan hoac mat khau khong dung. Vui long nhap lai." << endl;
+        }
     }
-}
+    
+    if(accesslevel == 1 || accesslevel == 2){
 
-if (accesslevel == 1 || accesslevel == 2) {
-    if (accesslevel == 1){
-        cout << "BAN DANG DANG NHAP VOI TU CACH HIEU TRUONG." << endl;
-    }
-    else if (accesslevel == 2){
-        cout << "BAN DANG DANG NHAP VOI TU CACH HIEU PHO." << endl;
-    }
-    int p;
-    while (p != 5) {
-        cout << "\nBAN MUON TRUY CAP VAO NOI DUNG NAO." << endl;
-        cout << "1. Quan li giao vien.          " << "2. Quan li hoc sinh." << endl;
-        cout << "3. Quan li hoc phi.            " << "4. Quan li phu huynh." << endl;
-        cout << "5. Thoat va ket thuc chuong trinh." << endl;
-        cin >> p;
-        switch(p){
+        if (accesslevel == 1){
+            cout << "BAN DANG DANG NHAP VOI TU CACH HIEU TRUONG." << endl;
+        }
+
+        else if (accesslevel == 2){
+            cout << "BAN DANG DANG NHAP VOI TU CACH HIEU PHO." << endl;
+        }
+
+        int choose;
+        while(choose!=5){
+
+            cout << "\n             BAN MUON TRUY CAP VAO NOI DUNG NAO." << endl;
+            cout << "1. Quan li giao vien.          " << "2. Quan li hoc sinh." << endl;
+            cout << "3. Quan li hoc phi.            " << "4. Quan li phu huynh." << endl;
+            cout << "5. Thoat va ket thuc chuong trinh." << endl;
+
+            cin >> choose;
+        switch(choose){
+
+            
             case 1:
-            int choice1;
-
-            while (true) {
-            cout << "\tCHUONG TRINH QUAN LY GIAO VIEN.\t" << endl;
-            cout << "\n                       MENU                         ";
-            cout << "\n----------------------------------------------------";     	
-            cout << "\n        1.Nhap thong tin giao vien                  ";
-            cout << "\n        2.Xuat danh sach giao vien                  ";
-            cout << "\n        3.Tim kiem giao vien theo ma giao vien      ";
-            cout << "\n        4.Tim kiem giao vien theo cccd              ";
-            cout << "\n        5.Sap xep luong giao vien tang dan          ";
-            cout << "\n        6.Tinh tong luong cac giao vien             ";
-            cout << "\n        7.Tim kiem giao vien thu nhap cao nhat      ";
-            cout << "\n        8.Tim kiem giao vien co phu cap>100.000     "; 
-            cout << "\n        9.Thoat va ket thuc chuong trinh            ";
-            cout << "\n                                                    ";  
-            cout << "\n----------------------------------------------------";
-            cout << "\n\tNhap lua chon cua ban:";
-            cin >> choice1;
-
-            switch (choice1) {
-                case 1: {
-                giaovien k;
-                k.nhap();
-                giaovien *b = new giaovien[a + 1];
-                for (int i = 0; i < a; ++i) {
-                    b[i] = t[i];
-                }
-                b[a] = k;
-                a += 1;
-                delete[] t;
-                t = b;
-                break;
-                cout << endl;
-                system("pause");
-                break;
-                }
-                case 2:
-                xuatds(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 3:
-                timkiemmagv(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 4:
-                timkiemcccd(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 5:
-                sapxep(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 6:
-                tinhtongluong(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 7:
-                thuclinhmax(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 8:
-                timphucap(t, a);
-                cout << endl;
-                system("pause");
-                break;
-                case 9:
-                cout << "Thoat.\n";
-                delete[] t;
-                return 0;
-                default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
-        }
-        }
-        case 2:
-        int choice2;
-
-        while (choice2!=5) {
-        cout << "\n                                         MENU" << endl;
-
-        cout << "\n1.Nhap thong tin hoc sinh moi.           " << "2.Hien thi danh sach hoc sinh";     	
-        cout << "\n3.Sua doi thong tin hoc sinh.            " << "4.Tim kiem thong tin hoc sinh.";
-        cout << "\n5.Thoat va ket thuc chuong trinh.        " << endl;
-
-        cout << "\nNhap lua chon cua ban:";
-        cin >> choice2;
-
-        switch (choice2) {
-            case 1: {
-                Student k;
-                k.enter();
-                Student *b = new Student[n + 1];
-                for (int i = 0; i < n; ++i) {
-                    b[i] = s[i];
-                }
-                b[n] = k;
-                n += 1;
-                delete[] s;
-                s = b;
-                cout << endl;
-                //system("pause");
-                break;
-            }
+            manageteacher1(t,c);
+            system("pause");
+            break;
             case 2:
-                displayAll(s, n);
-                cout << endl;
-                //system("pause");
-                break;
+            managestudent(s,n);
+            system("pause");
+            break;
             case 3:
-                change(s, n);
-                cout << endl;
-                //system("pause");
-                break;
+            managetuition(T,d);
+            system("pause");
+            break;
             case 4:
-                search(s, n);
-                cout << endl;
-                //system("pause");
-                break;
+            manageparent(p,e);
+            system("pause");
+            break;
             case 5:
-                cout << "Thoat.\n";
-                delete[] s;
-                return 0;
+            cout << "Thoat chuong trinh va ket thuc.";
+            system("pause");
+            break;
+            return 0;
             default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
-        }
-        system("pause");
-        }
-        
-        case 3:
-        int k1 ;
-        while (k1 != 4) {
-        cout << "\n                                              MENU " << endl;
-        cout << "------------------------------------------------------------------------------------------------" << endl;
-        cout << "1. Hien thi thong tin hoc phi toan bo.\n2. Hien thi nhung hoc sinh chua dong xong hoc phi." << endl;
-        cout << "3. Thay doi trang thai hoc phi cua hoc sinh.\n4. Thoat." << endl;
-        cout << "\nNhap lua chon: ";
-        cin >> k1;
-        switch (k1) {
-            case 1:
-                displayAll(T, d);
-                break;
-            case 2:
-                unpaid(T, d);
-                break;
-            case 3: {
-                int id;
-                bool check = false;
-                cout << "\nNhap ma hoc sinh: ";
-                cin >> id;
-                for (int i = 0; i < d; i++) {
-                    if (id == T[i].getid()) {
-                        T[i].changestatus();
-                        check = true;
-                        break;
-                    }
-                }
-                if (!check) {
-                    cout << "\nMa hoc sinh khong ton tai. Vui long nhap lai." << endl;
-                }
-                break;
-            }
-            case 4:
-                cout << "\nThoat." << endl;
-                break;
-            default:
-                cout << "\nLua chon khong hop le. Vui long nhap lai." << endl;
-                break;
-        }
-        system("pause");
-        }
-        case 4:
-        int choice4;
-
-        while (choice4 != 5) {
-        cout << "\n                                         MENU" << endl;
-        cout << "\n1. Nhap thong tin phu huynh moi.             " << "2. Hien thi danh sach phu huynh." << endl;
-        cout << "\n3. Sua doi thong tin phu huynh.                " << "4. Tim kiem thong tin phu huynh." << endl;
-        cout << "\n5. Thoat va ket thuc chuong trinh." << endl;
-
-        cout << "\nNhap lua chon cua ban: ";
-        cin >> choice4;
-
-        switch (choice4) {
-            case 1: {
-                Parent newParent;
-                newParent.enter();
-                Parent* temp = new Parent[e + 1];
-                for (int i = 0; i < e; ++i) {
-                    temp[i] = parents[i];
-                }
-                temp[e] = newParent;
-                delete[] parents;
-                parents = temp;
-                e += 1;
-                cout << endl;
-                system("pause");
-                break;
-            }
-            case 2:
-                displayAll(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 3:
-                changeParent(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 4:
-                searchParent(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 5:
-                cout << "Thoat.\n";
-                delete[] parents;
-                return 0;
-            default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
-        }
-        }
-        case 5:
-        cout << "Ket thuc chuong trinh.";
-        break;
-        return 0;
-        default:
-        cout << "\nLoi. Vui long nhap lai.";
-        system("pause");
-        break;
-
+            cout << "Loi. Vui long nhap lai.";
+            system("pause");
+            break;
         }
     }
-}
+    }
 
-if (accesslevel == 3) {
+    if(accesslevel == 3){
+
     cout << "BAN DANG DANG NHAP VOI TU CACH LA GIAO VIEN." << endl;
-    int p;
-    while (p != 5) {
+    
+    int choose;
+    while(choose!=5){
+
         cout << "\nBAN MUON TRUY CAP NOI DUNG NAO." << endl;
         cout << "1. Quan li thong tin ca nhan.      " << "2. Quan li hoc sinh." << endl;
         cout << "3. Quan li hoc phi.                " << "4. Quan li phu huynh." << endl;
         cout << "5.Thoat va ket thuc chuong trinh" << endl;
-        cin >> p;
-        switch(p){
-        case 1:
-        int choice5;
 
-        while (true) {
-        cout << "\n                       MENU                         ";
-        cout << "\n----------------------------------------------------";     	
-        cout << "\n        1.Thay doi thong tin ca nhan                ";
-        cout << "\n        2.Hien thi thong tin ca nhan                ";
-        cout << "\n        3.Thoat va ket thuc chuong trinh            ";
-        cout << "\n                                                    ";  
-        cout << "\n----------------------------------------------------";
-        cout << "\n\tNhap lua chon cua ban:";
-        cin >> choice5;
+        cin >> choose;
 
-        switch (choice5) {
+        switch(choose){
             case 1:
-            for (int i=0; i<c; i++){
-                if(user == t[i].get_magv()){
-                    t[i].nhap();
-                }
-            }
-            cout << endl;
+            manageteacher2(t,c,user);
             system("pause");
             break;
             case 2:
-            for (int i=0; i<c; i++){
-                if(user == t[i].get_magv()){
-                    t[i].xuat();
-                }
-            }
-            cout << endl;
+            managestudent(s,n);
             system("pause");
             break;
             case 3:
-                cout << "Thoat.\n";
-                delete[] t;
-                return 0;
-            default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
-        }
-        }
-        case 2:
-        int choice6;
-
-        while (choice6!=5) {
-        cout << "\n                                         MENU" << endl;
-
-        cout << "\n1.Nhap thong tin hoc sinh moi.           " << "2.Hien thi danh sach hoc sinh";     	
-        cout << "\n3.Sua doi thong tin hoc sinh.            " << "4.Tim kiem thong tin hoc sinh.";
-        cout << "\n5.Thoat va ket thuc chuong trinh.        " << endl;
-
-        cout << "\nNhap lua chon cua ban:";
-        cin >> choice6;
-
-        switch (choice6) {
-            case 1: {
-                Student k;
-                k.enter();
-                Student *b = new Student[n + 1];
-                for (int i = 0; i < n; ++i) {
-                    b[i] = s[i];
-                }
-                b[n] = k;
-                n += 1;
-                delete[] s;
-                s = b;
-                cout << endl;
-                //system("pause");
-                break;
-            }
-            case 2:
-                displayAll(s, n);
-                cout << endl;
-                //system("pause");
-                break;
-            case 3:
-                change(s, n);
-                cout << endl;
-                //system("pause");
-                break;
+            managetuition(T,d);
+            system("pause");
+            break;
             case 4:
-                search(s, n);
-                cout << endl;
-                //system("pause");
-                break;
+            manageparent(p,e);
+            system("pause");
+            break;
             case 5:
-                cout << "Thoat.\n";
-                delete[] s;
-                return 0;
+            cout << "Thoat chuong trinh va ket thuc.";
+            system("pause");
+            break;
+            return 0;
             default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
+            cout << "Loi. Vui long nhap lai.";
+            system("pause");
+            break;
+
         }
-        system("pause");
+
     }
-        case 3:
-        int k;
-        while (k != 4) {
-        cout << "\n                                              MENU " << endl;
-        cout << "------------------------------------------------------------------------------------------------" << endl;
-        cout << "1. Hien thi thong tin hoc phi toan bo.\n2. Hien thi nhung hoc sinh chua dong xong hoc phi." << endl;
-        cout << "3. Thay doi trang thai hoc phi cua hoc sinh.\n4. Thoat." << endl;
-        cout << "\nNhap lua chon: ";
-        cin >> k;
-        switch (k) {
-            case 1:
-                displayAll(T, d);
-                break;
-            case 2:
-                unpaid(T, d);
-                break;
-            case 3: {
-                int id;
-                bool check = false;
-                cout << "\nNhap ma hoc sinh: ";
-                cin >> id;
-                for (int i = 0; i < d; i++) {
-                    if (id == T[i].getid()) {
-                        T[i].changestatus();
-                        check = true;
-                        break;
-                    }
-                }
-                if (!check) {
-                    cout << "\nMa hoc sinh khong ton tai. Vui long nhap lai." << endl;
-                }
-                break;
-            }
-            case 4:
-                cout << "\nThoat." << endl;
-                break;
-            default:
-                cout << "\nLua chon khong hop le. Vui long nhap lai." << endl;
-                break;
-        }
-        system("pause");
-        }
-        case 4:
-        int choice7 ;
-
-        while (choice7 != 5) {
-            cout << "\n                                         MENU" << endl;
-            cout << "\n1. Nhap thong tin phu huynh moi.             " << "2. Hien thi danh sach phu huynh." << endl;
-            cout << "\n3. Sua doi thong tin phu huynh.                " << "4. Tim kiem thong tin phu huynh." << endl;
-            cout << "\n5. Thoat va ket thuc chuong trinh." << endl;
-
-            cout << "\nNhap lua chon cua ban: ";
-            cin >> choice7;
-
-            switch (choice7) {
-            case 1: {
-                Parent newParent;
-                newParent.enter();
-                Parent* temp = new Parent[e + 1];
-                for (int i = 0; i < e; ++i) {
-                    temp[i] = parents[i];
-                }
-                temp[e] = newParent;
-                delete[] parents;
-                parents = temp;
-                e += 1;
-                cout << endl;
-                system("pause");
-                break;
-            }
-            case 2:
-                displayAll(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 3:
-                changeParent(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 4:
-                searchParent(parents, e);
-                cout << endl;
-                system("pause");
-                break;
-            case 5:
-                cout << "Thoat.\n";
-                delete[] parents;
-                return 0;
-            default:
-                cout << "Lua chon khong hop le. Vui long chon lai.\n";
-                break;
-            }
-        }
-
-        case 5:
-        cout << "Ket thuc chuong trinh.";
-        break;
-        return 0;
-        default:
-        cout << "\nLoi. Vui long nhap lai.";
-        system("pause");
-        break;
-        }
     }
-}
 
-if (accesslevel == 4) {
-    cout << "Ban dang dang nhap voi tu cach phu huynh hoc sinh." << endl;
-    int p;
-    while (p != 4) {
+    if(accesslevel == 4){
+    
+        cout << "BAN DANG DANG NHAP VOI TU CACH PHU HUYNH HOC SINH " << endl;
+
+        int choose;
+        while(true){
+
         cout << "\nCHON THAO TAC BAN MUON THUC HIEN." << endl;
         cout << "1. Hien thi thong tin con cai." << "          2. Hien thi tinh trang hoc phi." << endl;
         cout << "3. Thoat va ket thuc chuong trinh. " << endl;
-        cin >> p;
-        switch(p){
+        
+        switch(choose){
             case 1:
             for(int i=0; i<d; i++){
-                if(user == s[i].getid()){
+                if(user==s[i].getid()){
                     s[i].displayOne();
                 }
             }
@@ -611,11 +506,9 @@ if (accesslevel == 4) {
             cout << "\nLoi. Vui long nhap lai.";
             system("pause");
             break;
-            
+        }
         }
     }
-
-}
-delete[] u;delete[] s;delete[] t;delete[] T;delete[] parents;
+    delete [] t,p,u,T,s;
 
 }
